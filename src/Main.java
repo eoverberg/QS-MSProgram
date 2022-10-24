@@ -1,4 +1,9 @@
-
+// Erik Overberg
+// 10/24/22
+// CS 321 Fall 2022
+// This program reads an input file of strings given by the user and produces 2 outputs
+// The first is sorted with quicksort and the second with mergesort
+// Also prints to console the time elapsed for each sort
 import java.io.*;
 import java.util.Scanner;
 
@@ -16,34 +21,48 @@ public class Main {
     public static int myPartition(String[] arr, int lo, int hi) {
         String pivotValue = arr[lo];
         //char[] pivotArray = pivotValue.toLowerCase().toCharArray();
-        int i = lo;
-        int j = hi;
-        do {
-//            char[] arrayLinei = arr[i].toCharArray();
-//            for (int k = 0; k < arrayLinei.length; k++) {
-//                arrayLinei[k] = Character.toLowerCase(pivotArray[k]);
-//            }
-//            char[] arrayLinej = arr[j].toCharArray();
-//            for (int k = 0; k < arrayLinej.length; k++) {
-//                arrayLinej[k] = Character.toLowerCase(arrayLinej[k]);
-//            }
-            if (arr[i].compareToIgnoreCase(pivotValue) < 0) {
+        int i = lo - 1;
+        int j = hi + 1;
+        while (true) {
+            do {
                 i++;
-            }
-            if (arr[j].compareToIgnoreCase(pivotValue) > 0) {
-                j++;
+            } while (arr[i].compareToIgnoreCase(pivotValue) < 0);
+            do {
+                j--;
+            } while (arr[j].compareToIgnoreCase(pivotValue) > 0);
+            if (i >=j) {
+                return j; // returns the pivot value when i and j switch
             }
             String swap = arr[i];
             arr[i] = arr[j];
             arr[j] = swap;
-        } while (i >= j);
-        String swap = arr[i];
-        arr[i] = arr[j];
-        arr[j] = swap;
-        String temp = arr[i];
-        arr[i] = arr[lo];
-        arr[lo] = temp;
-        return j;
+        }
+//        do {
+////            char[] arrayLinei = arr[i].toCharArray();
+////            for (int k = 0; k < arrayLinei.length; k++) {
+////                arrayLinei[k] = Character.toLowerCase(pivotArray[k]);
+////            }
+////            char[] arrayLinej = arr[j].toCharArray();
+////            for (int k = 0; k < arrayLinej.length; k++) {
+////                arrayLinej[k] = Character.toLowerCase(arrayLinej[k]);
+////            }
+//            if (arr[i].compareToIgnoreCase(pivotValue) < 0) {
+//                i++;
+//            }
+//            if (arr[j].compareToIgnoreCase(pivotValue) > 0) {
+//                j--;
+//            }
+//            String swap = arr[i];
+//            arr[i] = arr[j];
+//            arr[j] = swap;
+//        } while (i <= j);
+//        String swap = arr[i];
+//        arr[i] = arr[j];
+//        arr[j] = swap;
+//        String temp = arr[i];
+//        arr[i] = arr[lo];
+//        arr[lo] = temp;
+        // return j
     }
 
     /**
@@ -75,14 +94,13 @@ public class Main {
         String[] Right_arr = new String [right];
 
         System.arraycopy(arr, lo, Left_arr, 0, left);
-
+        // the splitting
         for (int j = 0; j < right; ++j)
             Right_arr[j] = arr[mid + 1+ j];
-
+        //increments through and compares the strings
         int i = 0, j = 0;
         int k = lo;
         while (i < left && j < right) {
-            System.out.println(Left_arr[i]);
 //            char[] leftchar = Left_arr[i].toLowerCase().toCharArray();
 //            char[] rightchar = Right_arr[j].toLowerCase().toCharArray();
             if (Left_arr[i].compareToIgnoreCase(Right_arr[j]) <= 0)  {
@@ -167,7 +185,7 @@ public class Main {
 
         //times how long the quicksort function takes
         long qsStartTime = System.nanoTime();
-        //qs(lines, 0, length);
+        qs(lines, 0, length);
         long qsEndTime = System.nanoTime();
         long qsDuration = (qsEndTime-qsStartTime); // time taken to execute quicksort in nanoseconds
 
@@ -188,9 +206,10 @@ public class Main {
             myWriter.write(lines[i] + "\n");
             //myWriter.newLine();
         }
-         myWriter.flush();
+         myWriter.flush(); //resets the writer
         System.out.print("Time taken to execute Quick Sort (in nanoseconds): ");
         System.out.println(qsDuration);
+        // writes to second file
          myWriter = new BufferedWriter(new FileWriter(fileOut2));
         for (int i = 0; i  < numlines; i++) {
             myWriter.write(mslines[i] + "\n");
