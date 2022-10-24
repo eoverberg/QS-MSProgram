@@ -123,7 +123,7 @@ public class Main {
 //        }
         int length = lines.length - 1;
         long qsStartTime = System.nanoTime();
-        qs(lines, 0, length);
+        //qs(lines, 0, length);
         long qsEndTime = System.nanoTime();
         long qsDuration = (qsEndTime-qsStartTime); // time taken to execute quicksort in nanoseconds
         long msStartTime = System.nanoTime();
