@@ -8,15 +8,22 @@ public class Main {
 
     public static int myPartition(String[] arr, int lo, int hi) {
         String pivotValue = arr[lo];
-        char[] pivotArray = pivotValue.toLowerCase().toCharArray();
-        int i = lo, j = hi;
+        //char[] pivotArray = pivotValue.toLowerCase().toCharArray();
+        int i = lo;
+        int j = hi;
         do {
-            char[] arrayLinei = arr[i].toLowerCase().toCharArray();
-            char[] arrayLinej = arr[j].toLowerCase().toCharArray();
-            if (arrayLinei[0] < pivotArray[0]) {
+//            char[] arrayLinei = arr[i].toCharArray();
+//            for (int k = 0; k < arrayLinei.length; k++) {
+//                arrayLinei[k] = Character.toLowerCase(pivotArray[k]);
+//            }
+//            char[] arrayLinej = arr[j].toCharArray();
+//            for (int k = 0; k < arrayLinej.length; k++) {
+//                arrayLinej[k] = Character.toLowerCase(arrayLinej[k]);
+//            }
+            if (arr[i].compareTo(pivotValue) < 0) {
                 i++;
             }
-            if (arrayLinej[0] > pivotArray[0]) {
+            if (arr[j].compareTo(pivotValue) > 0) {
                 j++;
             }
             String swap = arr[i];
@@ -56,7 +63,7 @@ public class Main {
             System.out.println(Left_arr[i]);
             char[] leftchar = Left_arr[i].toLowerCase().toCharArray();
             char[] rightchar = Right_arr[j].toLowerCase().toCharArray();
-            if (leftchar[0] <= rightchar[0])  {
+            if (Left_arr[i].compareTo(Right_arr[j]) <= 0)  {
                 arr[k] = Left_arr[i];
                 i++;
             }
@@ -87,10 +94,10 @@ public class Main {
     }
     public static void main(String[] args) throws IOException, ArrayIndexOutOfBoundsException {
         Scanner input = new Scanner(System.in);
-        String fileIn = "sample10.txt";
+        //String fileIn = "sample10.txt";
         String fileOut = "output.txt";
-        //System.out.println ("Enter a file to be read: ");
-        //String fileIn = input.nextLine();
+        System.out.println ("Enter a file to be read: ");
+        String fileIn = input.nextLine();
          //System.out.println ("Enter a name for the first output file: ");
          //String fileOut = input.nextLine();
         BufferedReader reader;
@@ -115,8 +122,14 @@ public class Main {
 //            System.out.println(mslines[i]);
 //        }
         int length = lines.length - 1;
+        long qsStartTime = System.nanoTime();
         //qs(lines, 0, length);
+        long qsEndTime = System.nanoTime();
+        long qsDuration = (qsEndTime-qsStartTime); // time taken to execute quicksort in nanoseconds
+        long msStartTime = System.nanoTime();
         ms(mslines, 0 , numlines-1);
+        long msEndTime = System.nanoTime();
+        long msDuration = (msEndTime-msStartTime); //time taken to execute merge sort in nanoseconds
          for (int i = 0; i < numlines; i++) {
              System.out.println(mslines[i]);
          }
@@ -127,6 +140,8 @@ public class Main {
             //myWriter.newLine();
         }
          myWriter.flush();
+        System.out.print("Time taken to execute Quick Sort (in nanoseconds): ");
+        System.out.println(qsDuration);
         //System.out.println ("Enter a name for the second output file: ");
         //String fileOut2 = input.nextLine();
         String fileOut2 = "output2.txt";
@@ -136,6 +151,8 @@ public class Main {
             myWriter.write(mslines[i] + "\n");
             //myWriter2.newLine();
         }
+        System.out.print("Time taken to execute Merge Sort (in nanoseconds): ");
+        System.out.print(msDuration);
         myWriter.close();
      }
 }
