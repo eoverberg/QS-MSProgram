@@ -5,8 +5,6 @@ import java.util.Scanner;
 import static java.lang.Math.*;
 
 public class Main {
-    public Main() throws IOException {
-    }
 
     public static int myPartition(String[] arr, int lo, int hi) {
         String pivotValue = arr[lo];
