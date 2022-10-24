@@ -20,10 +20,10 @@ public class Main {
 //            for (int k = 0; k < arrayLinej.length; k++) {
 //                arrayLinej[k] = Character.toLowerCase(arrayLinej[k]);
 //            }
-            if (arr[i].compareTo(pivotValue) < 0) {
+            if (arr[i].compareToIgnoreCase(pivotValue) < 0) {
                 i++;
             }
-            if (arr[j].compareTo(pivotValue) > 0) {
+            if (arr[j].compareToIgnoreCase(pivotValue) > 0) {
                 j++;
             }
             String swap = arr[i];
@@ -61,9 +61,9 @@ public class Main {
         int k = lo;
         while (i < left && j < right) {
             System.out.println(Left_arr[i]);
-            char[] leftchar = Left_arr[i].toLowerCase().toCharArray();
-            char[] rightchar = Right_arr[j].toLowerCase().toCharArray();
-            if (Left_arr[i].compareTo(Right_arr[j]) <= 0)  {
+//            char[] leftchar = Left_arr[i].toLowerCase().toCharArray();
+//            char[] rightchar = Right_arr[j].toLowerCase().toCharArray();
+            if (Left_arr[i].compareToIgnoreCase(Right_arr[j]) <= 0)  {
                 arr[k] = Left_arr[i];
                 i++;
             }
@@ -123,7 +123,7 @@ public class Main {
 //        }
         int length = lines.length - 1;
         long qsStartTime = System.nanoTime();
-        //qs(lines, 0, length);
+        qs(lines, 0, length);
         long qsEndTime = System.nanoTime();
         long qsDuration = (qsEndTime-qsStartTime); // time taken to execute quicksort in nanoseconds
         long msStartTime = System.nanoTime();
